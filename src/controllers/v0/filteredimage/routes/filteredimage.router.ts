@@ -17,7 +17,7 @@ router.get('/', async (req: Request, res: Response) => {
     try {
         image_path = await filterImageFromURL(imageUrl)
     } catch (error) {
-        return res.send({ success: false, message: error })
+        return res.status(500).send({ success: false, message: "Error when filtering image" })
     }
 
     if (!image_path)
