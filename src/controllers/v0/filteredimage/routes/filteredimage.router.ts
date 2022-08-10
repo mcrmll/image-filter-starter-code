@@ -8,15 +8,16 @@ const router: Router = Router();
 router.get('/', async (req: Request, res: Response) => {
     const imageUrl = req.query.image_url
     //if no url, wrong url or without images, return 400
-    if (!imageUrl && !isUri(imageUrl))
+    if (!isUri(imageUrl))
         return res.status(400).send({ success: false, message: 'Unexistent or badly formatted URL' })
 
+        console.log(!imageUrl)
     let image_path: string = null;
 
     try {
         image_path = await filterImageFromURL(imageUrl)
     } catch (error) {
-        return res.send({ success: false, message: error })
+        return res.status(500).send({ success: false, message: "Error when filtering image" })
     }
 
     if (!image_path)
