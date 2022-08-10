@@ -8,9 +8,10 @@ const router: Router = Router();
 router.get('/', async (req: Request, res: Response) => {
     const imageUrl = req.query.image_url
     //if no url, wrong url or without images, return 400
-    if (!imageUrl && !isUri(imageUrl))
+    if (!isUri(imageUrl))
         return res.status(400).send({ success: false, message: 'Unexistent or badly formatted URL' })
 
+        console.log(!imageUrl)
     let image_path: string = null;
 
     try {
